@@ -10,7 +10,6 @@ const PORT = process.env.PORT || 3001;
 // initialize server
 const app = express();
 
-// enable cors to prevent errors 
 app.use(cors());
 
 // make sure we can use JSON

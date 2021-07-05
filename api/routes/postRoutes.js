@@ -6,8 +6,10 @@ const _ = require('lodash');
 const Post = require('../models/Post'); 
 const authUtil = require('../utils/auth');
 
+var cors = require('cors')
+
 // get all posts
-router.get('/all', async (req,res) => {
+router.get('/all', cors(), async (req,res) => {
     let allPosts = await Post.find({}, '-userId').sort({ _id: -1 }).limit(20);
 
     if(!allPosts) {

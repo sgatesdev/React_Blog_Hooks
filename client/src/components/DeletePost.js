@@ -1,14 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchPost, deletePost } from '../actions';
 import { formatDate } from '../helpers/date';
 
+import db from '../apis/db'; // import AXIOS connection to database
+import history from '../history'; // import history object so I can push user around app
+
 const DeletePost = (props) => {
+    const dispatch = useDispatch();
+    const token = useSelector((state) => state.auth.userInfo.token);
+    const post = useSelector((state) => state.posts[props.match.params.id]);
+
+    const deletePost = async () => {
+        // send token with delete request (using POST since I'm sending JSON)
+        await db.post(`/delete/${props.match.params.id}`, { token: token });
+    
+        dispatch({ type: 'DELETE_POST', payload: props.match.params.id });
+    
+        /** NAVIGATION REDIRECT */
+        history.replace('/posts');
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
+        console.log(props.match.params.id)
         // delete the post
-        props.deletePost(props.match.params.id);
+        deletePost();
     }
 
     return props.post === undefined ? null : (
@@ -18,13 +38,13 @@ const DeletePost = (props) => {
             <div className="ui celled list">
             <div className="item">
                     <div className="content">
-                        {props.post.title} 
+                        {post.title} 
                         <h5>
-                        {` ${formatDate(props.post.createdAt)}`}
+                        {` ${formatDate(post.createdAt)}`}
                         </h5>
                     </div>
                     <div className="post_content">
-                         {props.post.content}
+                         {post.content}
                     </div>
                         
                 </div>

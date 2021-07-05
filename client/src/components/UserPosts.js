@@ -1,33 +1,32 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { fetchPosts } from '../actions';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import UserPostList from './UserPostList';
+import db from '../apis/db'; // import AXIOS connection to database
 
-class UserPosts extends React.Component {
-    // make sure posts are current
-    componentDidMount() {
-        this.props.fetchPosts(this.props.userId);
-    }
+const UserPosts = () => {
+    const dispatch = useDispatch();
 
-    render() {
-        return(
-            <div className="ui container">
-                <h1>Your posts</h1>
-                <div className="ui celled list">
-                    <UserPostList posts={this.props.posts} userEmail={this.props.userEmail} />
-                </div>
+    useEffect(() => {
+        (async () => {
+            const res = await db.get('/all');
+
+            dispatch({ type: 'FETCH_POSTS', payload: res.data });
+        })();     
+    }, [dispatch]);
+
+    const posts = useSelector((state) => Object.values(state.posts));
+    const userEmail = useSelector((state) => state.auth.userInfo.userEmail);
+
+    return(
+        <div className="ui container">
+            <h1>Your posts</h1>
+            <div className="ui celled list">
+                <UserPostList posts={posts} userEmail={userEmail} />
             </div>
-        ); 
-    }
+        </div>
+    ); 
+
 }
 
-// get posts out of store, put them in an array. take user email from store
-const mapStateToProps = (state) => {
-    return state.auth.userInfo === null ? {} : {
-        posts: Object.values(state.posts),
-        userEmail: state.auth.userInfo.userEmail
-    }
-}
-
-export default connect(mapStateToProps, { fetchPosts })(UserPosts);
+export default UserPosts;
