@@ -1,26 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { fetchPost, editPost } from '../actions';
+
+import db from '../apis/db'; // import AXIOS connection to database
+import history from '../history'; // import history object so I can push user around app
 
 const EditPost = (props) => {
-    // populate form with existing values for post 
-    useEffect(() => {
-        props.fetchPost(props.match.params.id);
-    });
+    const dispatch = useDispatch();
+    const post = useSelector((state) => state.posts[props.match.params.id]);
+    const { token, userId } = useSelector((state) => state.auth.userInfo);
 
     // pull post info from redux, create local state for title and content (for form validation)
-    const [title, setTitle] = useState(props.post.title);
-    const [content, setContent] = useState(props.post.content);
+    const [title, setTitle] = useState(post.title);
+    const [content, setContent] = useState(post.content);
+
+    const editPost = async () => {
+        // merge token, userId with new post data
+        const sendData = { title, content, token, userId };
+
+        const res = await db.put(`/update/${props.match.params.id}`, sendData);
+    
+        dispatch({ type: 'EDIT_POST', payload: res.data });
+    
+        /** NAVIGATION REDIRECT */
+        history.replace('/posts');
+    }
 
     // when form is submitted, send to action creator to update store and query API to update DB
     const onSubmit = (e) => {
         e.preventDefault();
         
-        let postInfo = { title, content };
-
         if(title !== '' && content !== '') {
-            props.editPost(props.match.params.id, postInfo);
+            editPost();
         }
     }
 
@@ -61,8 +73,4 @@ const EditPost = (props) => {
 
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return { post: state.posts[ownProps.match.params.id] }
-}
-
-export default connect(mapStateToProps, { fetchPost, editPost })(EditPost);
+export default EditPost;

@@ -1,9 +1,16 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { signIn, signOut } from '../actions';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-class GoogleLogin extends React.Component {
-    componentDidMount() {
+import history from '../history'; // import history object so I can push user around app
+
+const GoogleLogin = () => {
+    // define isSignedIn
+    const isSignedIn = useSelector((state) => state.auth.isSignedIn);
+    const dispatch = useDispatch();
+
+    const [auth, setAuth] = useState(null);
+
+    useEffect(() => {
         // load up google api in background, set up listener, link to state
         window.gapi.load('client:auth2', () => {
             window.gapi.client.init({ 
@@ -12,43 +19,62 @@ class GoogleLogin extends React.Component {
              })
              .then(() => {
                 // put auth status from google API into component level state
-                this.auth = window.gapi.auth2.getAuthInstance();
+                setAuth(window.gapi.auth2.getAuthInstance());
+
+                console.log(window.gapi.auth2.getAuthInstance())
 
                 // if auth status changes, set auth state to whatever the auth status is
-                this.onAuthChange(this.auth.isSignedIn.get());
+                onAuthChange(auth.isSignedIn.get());
 
                 // listen for changes to auth status from google api
-                this.auth.isSignedIn.listen(this.onAuthChange);
+                auth.isSignedIn.listen(onAuthChange);
              });
         });
-    }
+    }, []);
 
     // this will be called if auth state changes (see above)
-    onAuthChange = (isSignedIn) => {
+    const onAuthChange = (isSignedIn) => {
         // if user signed in, do the following
         if(isSignedIn) {
             // create object with all of users info
             const userInfo = {
-                token: this.auth.currentUser.get().getAuthResponse().id_token,
-                userId: this.auth.currentUser.get().getId(),
-                userEmail: this.auth.currentUser.get().getBasicProfile().getEmail(),
-                userActualName: this.auth.currentUser.get().getBasicProfile().getName()
+                token: auth.currentUser.get().getAuthResponse().id_token,
+                userId: auth.currentUser.get().getId(),
+                userEmail: auth.currentUser.get().getBasicProfile().getEmail(),
+                userActualName: auth.currentUser.get().getBasicProfile().getName()
             }
             
             // trigger signIn action creator/send info to REDUX store
-            this.props.signIn(userInfo);
+            signIn(userInfo);
         }
         else {
-            this.props.signOut();
+            signOut();
         }
     }
 
+    const signIn = (userInfo) => {
+        dispatch({
+            type: 'LOG_IN',
+            payload: userInfo
+        });
+
+        history.replace('/');
+    }
+
+    const signOut = () => {
+        dispatch({
+            type: 'LOG_OUT'
+        });
+
+        history.replace('/');
+    }
+
     // this helper method displays sign in / sign out Google button
-    renderButton = () => {
-        if(this.props.isSignedIn === null) {
+    const renderButton = () => {
+        if(isSignedIn === null) {
             return null;
         }
-        else if(this.props.isSignedIn) {
+        else if(isSignedIn) {
             return(
                 <button className="ui google button" onClick={this.auth.signOut}>
                     <i className="google icon" />
@@ -66,16 +92,7 @@ class GoogleLogin extends React.Component {
         }
     }
 
-    render() {
-        return <div>{ this.renderButton() }</div>
-    }
+    return <div>{ renderButton() }</div>
 }
 
-// send auth status from store to this component as prop
-const mapStateToProps = (state) => {
-    return { 
-        isSignedIn: state.auth.isSignedIn,
-    };
-}
-
-export default connect(mapStateToProps, { signIn, signOut })(GoogleLogin);
+export default GoogleLogin;

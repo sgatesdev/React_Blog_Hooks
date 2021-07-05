@@ -24,9 +24,9 @@ const Create = () => {
         // merge new post title and content with above information, including token
         const sendData = { ...postData, userId, userEmail, userActualName, token };
     
-        await db.post('/', sendData);
+        const res = await db.post('/', sendData);
     
-        dispatch({ type: 'WRITE_POST' });
+        dispatch({ type: 'WRITE_POST', payload: res.data });
     
         history.replace('/');
     }

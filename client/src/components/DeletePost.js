@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { fetchPost, deletePost } from '../actions';
 import { formatDate } from '../helpers/date';
 
 import db from '../apis/db'; // import AXIOS connection to database
@@ -26,12 +24,12 @@ const DeletePost = (props) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(props.match.params.id)
+
         // delete the post
         deletePost();
     }
 
-    return props.post === undefined ? null : (
+    return post === undefined ? null : (
         <div className="ui container">
         <form onSubmit={onSubmit} className="ui form error">
             <h1>Sure you want to delete this post?</h1>
@@ -57,8 +55,4 @@ const DeletePost = (props) => {
 
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return { post: state.posts[ownProps.match.params.id] }
-}
-
-export default connect(mapStateToProps, { fetchPost, deletePost })(DeletePost);
+export default DeletePost;
