@@ -18,11 +18,10 @@ const AllPosts = () => {
     const posts = useSelector((state) => Object.values(state.posts));
 
     return(
-        <div className="ui container">
-            <h1>All posts</h1>
-            <div className="ui celled list">
+        <div class="container pt-3 d-flex justify-content-center ">
+        <div class="row">
                 {posts ? <PostList posts={posts} /> : <h2>Loading</h2> }
-            </div>
+        </div>
         </div>
     ); 
 }

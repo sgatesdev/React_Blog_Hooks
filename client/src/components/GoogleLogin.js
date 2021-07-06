@@ -46,17 +46,35 @@ const GoogleLoginButton = () => {
         { !isSignedIn ?  
         <GoogleLogin
             clientId={process.env.REACT_APP_clientId}
-            className="ui google button"
-            buttonText="Login"
             onSuccess={signIn}
             onFailure={displayError}
             cookiePolicy={'single_host_origin'}
+            render={renderProps => (
+                <button 
+                    onClick={renderProps.onClick} 
+                    disabled={renderProps.disabled}
+                    className="btn btn-success display-flex align-middle m-0"
+                >
+                    <i className="bi bi-google" />
+                    <span className="px-1">Login</span>
+                    </button>
+            )}
         /> : 
         <GoogleLogout
             clientId={process.env.REACT_APP_clientId}
-            className="ui google button"
             buttonText="Logout"
             onLogoutSuccess={signOut}
+            className="ui google button"
+            render={renderProps => (
+                <button 
+                    onClick={renderProps.onClick} 
+                    disabled={renderProps.disabled}
+                    className="btn btn-success display-flex align-middle m-0"
+                >
+                    <i className="bi bi-google" />
+                    <span className="px-1">Logout</span>
+                    </button>
+            )}
         />
         }
         { error ? <h1>{error}</h1> : null }

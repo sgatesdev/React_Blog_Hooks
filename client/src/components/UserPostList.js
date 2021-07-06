@@ -9,33 +9,37 @@ const UserPostList = ({posts,userEmail}) => {
         return posts.map(post => {
             if(post.userEmail === userEmail) {
                 return(
-                    <div className="item" key={post.createdAt}>
-                        <div className="right floated content">
+                    <div class="col-12">
+                    <div className="card m-1" key={post.createdAt}>
+                        <div className="card-body bg-light">
+                            <h5 class="card-title">{post.title}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">by {post.userActualName} on {` ${formatDate(post.createdAt)}`}
+                            </h6>
+                            <p class="card-text">
+                            {post.content}
+                            </p>
+
                             <Link 
                                 to={`/posts/edit/${post._id}`}
                                 className="ui button"
                                 replace
                             >
-                            Edit
+                            <button className="btn btn-secondary">
+                                Edit
+                            </button>
                             </Link>
                             <Link 
                                 to={`/posts/delete/${post._id}`}
                                 className="ui button"
                                 replace
                             >
-                            Delete
+                            <button className="btn btn-secondary mx-1">
+                                Delete
+                            </button>
                             </Link>
                         </div>
-                        <div className="content">
-                            {post.title} 
-                            <h5>by {post.userActualName} on 
-                            {` ${formatDate(post.createdAt)}`}
-                            </h5>
-                        </div>
-                        <div className="post_content">
-                        {post.content}
-                        </div>
-                            
+                           
+                    </div>
                     </div>
                 );
             }

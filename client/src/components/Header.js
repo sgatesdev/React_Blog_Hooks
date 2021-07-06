@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -12,31 +13,42 @@ const Header = () => {
         if(isSignedIn) {
             return(
                 <>
-                <Link to="/posts" className="item" replace>
-                    Your Posts
-                </Link>
-                <Link to="/create" className="item" replace>
-                    Create
-                </Link>
+                <li class="nav-item">
+                    <Link className="nav-link" to="/posts">My Posts</Link>
+                </li>
+                <li class="nav-item">
+                    <Link className="nav-link" to="/create">Create</Link>
+                </li>
                 </>
             );
         }
     }
 
-    return(
+
+    return (
         <>
-        <div className="ui inverted vertical masthead center aligned segment">
-        <a href="https://samgates.io/">SamGates.io</a> - React Blog w/ Google Auth!</div>
-        <div className="ui secondary pointing menu">
-            <Link to="/" className="item" replace>
-                Home
+        <div class="jumbotron bg-info p-3">
+        <h1 class="display-4">React Blog </h1>
+        <p class="lead">with Redux Hooks API, Google Auth</p>
+        </div>
+
+        <nav class="navbar navbar-light bg-dark justify-content-between p-3">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <Link to="/" className="navbar-brand" replace>
+                React Blog
             </Link>
-            {renderUserLinks()}
-        <div className="right menu">
-            <GoogleLogin />
-        </div>
-        </div>
-        </>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li className="nav-item active">
+                        <Link className="nav-link" to="/">Home</Link>
+                    </li>
+                    {renderUserLinks()}
+                </ul>
+            </div>
+        </nav>
+        <GoogleLogin />
+        </nav> 
+        </>      
     );
 }
 

@@ -30,25 +30,21 @@ const DeletePost = (props) => {
     }
 
     return post === undefined ? null : (
-        <div className="ui container">
-        <form onSubmit={onSubmit} className="ui form error">
+        <div className="container">
+        <form onSubmit={onSubmit}>
             <h1>Sure you want to delete this post?</h1>
-            <div className="ui celled list">
-            <div className="item">
-                    <div className="content">
-                        {post.title} 
-                        <h5>
-                        {` ${formatDate(post.createdAt)}`}
-                        </h5>
-                    </div>
-                    <div className="post_content">
-                         {post.content}
-                    </div>
-                        
-                </div>
+            <div className="card-body bg-light mb-2">
+                <h5 class="card-title">{post.title}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">by {post.userActualName} on {` ${formatDate(post.createdAt)}`}
+                </h6>
+                <p class="card-text">
+                {post.content}
+                </p>
             </div>
-            <Link to="/posts" className="ui button">Back</Link>
-            <button className="ui button" onClick={onSubmit}>Delete</button>
+            <Link to="/posts">
+                <button className="btn btn-secondary">Back</button>
+            </Link>
+            <button className="btn btn-secondary mx-1" onClick={onSubmit}>Delete</button>
         </form>
         </div>
     );

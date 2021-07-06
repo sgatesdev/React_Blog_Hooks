@@ -44,7 +44,7 @@ const Create = () => {
 
     const renderError = () => {
         if(title === '') {
-            return <div>Please enter a title</div>;
+            return <div className="text-danger m-1">Please enter a title</div>;
         }
 
         if(content === '') {
@@ -55,23 +55,29 @@ const Create = () => {
     }
 
     return(
-        <div className="ui container">
-        <form onSubmit={onSubmit} className="ui form error">
+        <div className="container">
+        <form onSubmit={onSubmit}>
+            <div class="form-group">
             <h1>Create a new post</h1>
             <label>Enter Title</label>
             <input 
                 name="title" 
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                className="form-control"
             />
+        </div>
+        <div className="form-group">
             <label>Enter Post</label>
             <textarea 
                 name="content" 
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
+                className="form-control"
             />
             {renderError()}
-            <button className="ui button" type="submit">Publish</button>
+            <button className="btn btn-secondary" type="submit">Publish</button>
+        </div>
         </form>
         </div>
     );

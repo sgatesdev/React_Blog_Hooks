@@ -38,35 +38,47 @@ const EditPost = (props) => {
 
     const renderError = () => {
         if(title === '') {
-            return <div>Please enter a title</div>;
+            return <div className="text-danger m-1">Please enter a title</div>;
         }
 
         if(content === '') {
-            return <div>Please enter content</div>;
+            return <div className="text-danger m-1">Please enter content</div>;
         }
 
         return null;
     }
 
     return(
-        <div className="ui container">
+        <div className="container">
         <form onSubmit={onSubmit} className="ui form error">
+            <div className="form-group my-2">
             <h1>Edit Your Post</h1>
             <label>Title</label>
             <input 
                 name="title" 
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                className="form-control"
             />
+            </div>
+            <div className="form-group my-2">
             <label>Post</label>
             <textarea 
                 name="content" 
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
+                className="form-control"
             />
             {renderError()}
-            <Link to="/posts" className="ui button" replace>Back</Link>
-            <button className="ui button" onClick={onSubmit}>Update</button>
+            </div>
+            <div className="form-group my-2">
+            <Link to="/posts" className="ui button" replace>
+                <button className="btn btn-secondary">
+                Back    
+                </button>
+            </Link>
+            <button className="btn btn-secondary mx-1" onClick={onSubmit}>Update</button>
+            </div>
         </form>
         </div>
     );
