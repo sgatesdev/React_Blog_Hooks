@@ -8,13 +8,7 @@ For this project, I updated the client-side of my [React Blog](https://github.co
 
 React Blog is a full-stack MERN application. The frontend is hosted on my personal domain. The backend is hosted on Heroku and for the database I used MongoDB Atlas.
 
-Future features in development include:
-
-- Comments
-- Liking posts
-- User pages
-- Register for an account
-- Custom user database and login system
+The app is deployed on my personal domain. Check it out [here](https://samgates.io/projects/react-blog-hooks/)!
 
 ## Table of Contents
 
@@ -23,6 +17,7 @@ Future features in development include:
 - [Contribute](#contribute)
 - [Test](#test)
 - [License](#license)
+- [Future Features](#future-features)
 - [Questions](#questions)
 
 ## Installation
@@ -50,8 +45,14 @@ Go to the deployed version, sign in with Google, and start writing posts!
 Copyright (c) Sam Gates. All rights reserved.
 Licensed under the [MIT](https://opensource.org/licenses/MIT) license.
 
+## Future Features
+
+- Comments
+- Liking posts
+- User pages
+- Register for an account
+- Custom user database and login system
+
 ## Questions
 
-Check out my [GitHub Profile](https://github.com/sg0703).
-
-Email with questions! You can reach me at sam.j.gates@gmail.com.
+Check out my [GitHub Profile](https://github.com/sg0703). Email with questions! You can reach me at sam.j.gates@gmail.com.
