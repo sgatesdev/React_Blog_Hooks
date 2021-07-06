@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import GoogleLogin from './GoogleLogin'
 
-const Header = ({isSignedIn}) => {
+const Header = () => {
+    const isSignedIn = useSelector((state) => state.auth.isSignedIn);
+
     // conditionally render Your Posts and Create links depending on auth status (made easy with Redux)
     const renderUserLinks = () => {
         if(isSignedIn) {
@@ -38,9 +40,4 @@ const Header = ({isSignedIn}) => {
     );
 }
 
-// send auth status from REDUX to this component
-const mapStateToProps = (state) => {
-    return { isSignedIn: state.auth.isSignedIn };
-}
-
-export default connect(mapStateToProps, {})(Header);
+export default Header;

@@ -46,18 +46,20 @@ const GoogleLoginButton = () => {
         { !isSignedIn ?  
         <GoogleLogin
             clientId={process.env.REACT_APP_clientId}
+            className="ui google button"
             buttonText="Login"
             onSuccess={signIn}
             onFailure={displayError}
             cookiePolicy={'single_host_origin'}
         /> : 
         <GoogleLogout
-            clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+            clientId={process.env.REACT_APP_clientId}
+            className="ui google button"
             buttonText="Logout"
             onLogoutSuccess={signOut}
         />
         }
-        { error ? <h1></h1> : null }
+        { error ? <h1>{error}</h1> : null }
         </div>
     );
 }
