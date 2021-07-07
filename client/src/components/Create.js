@@ -48,7 +48,7 @@ const Create = () => {
         }
 
         if(content === '') {
-            return <div>Please enter content</div>;
+            return <div className="text-danger m-1">Please enter content</div>;
         }
 
         return null;
@@ -57,7 +57,7 @@ const Create = () => {
     return(
         <div className="container">
         <form onSubmit={onSubmit}>
-            <div class="form-group">
+            <div className="form-group">
             <h1>Create a new post</h1>
             <label>Enter Title</label>
             <input 

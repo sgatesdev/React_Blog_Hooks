@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import PostList from './PostList';
@@ -6,10 +6,13 @@ import db from '../apis/db'; // import AXIOS connection to database
 
 const AllPosts = () => {
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         (async () => {
             const res = await db.get('/all');
+
+            setTimeout(() => setLoading(false), 500);
 
             dispatch({ type: 'FETCH_POSTS', payload: res.data });
         })();     
@@ -18,9 +21,9 @@ const AllPosts = () => {
     const posts = useSelector((state) => Object.values(state.posts));
 
     return(
-        <div class="container pt-3 d-flex justify-content-center ">
-        <div class="row">
-                {posts ? <PostList posts={posts} /> : <h2>Loading</h2> }
+        <div className="container pt-3 d-flex justify-content-center ">
+        <div className="row">
+                {loading ? <h2>Loading posts...</h2> : <PostList posts={posts} />}
         </div>
         </div>
     ); 

@@ -19,8 +19,8 @@ const UserPosts = () => {
     const userEmail = useSelector((state) => state.auth.userInfo.userEmail);
 
     return(
-        <div class="container pt-3 d-flex justify-content-center ">
-        <div class="row">
+        <div className="container pt-3 d-flex justify-content-center ">
+        <div className="row">
                 <UserPostList posts={posts} userEmail={userEmail} />
         </div>
         </div>

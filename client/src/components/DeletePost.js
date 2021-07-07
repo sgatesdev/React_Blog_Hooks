@@ -34,10 +34,10 @@ const DeletePost = (props) => {
         <form onSubmit={onSubmit}>
             <h1>Sure you want to delete this post?</h1>
             <div className="card-body bg-light mb-2">
-                <h5 class="card-title">{post.title}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">by {post.userActualName} on {` ${formatDate(post.createdAt)}`}
+                <h5 className="card-title">{post.title}</h5>
+                <h6 className="card-subtitle mb-2 text-muted">by {post.userActualName} on {` ${formatDate(post.createdAt)}`}
                 </h6>
-                <p class="card-text">
+                <p className="card-text">
                 {post.content}
                 </p>
             </div>
