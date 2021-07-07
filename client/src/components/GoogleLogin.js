@@ -30,11 +30,11 @@ const GoogleLoginButton = () => {
     }
 
     const signOut = () => {
+        history.replace('/');
+        
         dispatch({
             type: 'LOG_OUT'
         });
-
-        history.replace('/');
     }
 
     const displayError = ({ details }) => {

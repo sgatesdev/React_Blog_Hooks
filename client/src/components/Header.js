@@ -33,11 +33,11 @@ const Header = () => {
         </div>
 
         <nav className="navbar navbar-light bg-dark justify-content-between p-3">
-        <nav className="navbar navbar-expand-lg navbar-dark">
+        <nav className="navbar navbar-expand navbar-dark">
             <Link to="/" className="navbar-brand" replace>
                 React Blog
             </Link>
-            <div className="collapse navbar-collapse" id="navbarNav">
+            <div className="collapse navbar-collapse" id="navbarMenu">
                 <ul className="navbar-nav">
                     <li className="nav-item active">
                         <Link className="nav-link" to="/">Home</Link>
