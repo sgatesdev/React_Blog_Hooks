@@ -16,7 +16,9 @@ const PostList = ({posts}) => {
                     <p className="card-text">
                     {post.content}
                     </p>
+                    <Link to={`single/${post._id}`}>
                     <button className="btn btn-secondary">View Comments</button>
+                    </Link>
                     <button className="btn btn-secondary mx-3">Like</button>
                     </div>
                 </div>

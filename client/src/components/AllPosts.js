@@ -10,7 +10,7 @@ const AllPosts = () => {
 
     useEffect(() => {
         (async () => {
-            const res = await db.get('/all');
+            const res = await db.get('/post/all');
 
             setTimeout(() => setLoading(false), 500);
 

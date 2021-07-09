@@ -19,7 +19,7 @@ const EditPost = (props) => {
         // merge token, userId with new post data
         const sendData = { title, content, token, userId };
 
-        const res = await db.put(`/update/${props.match.params.id}`, sendData);
+        const res = await db.put(`/post/update/${props.match.params.id}`, sendData);
     
         dispatch({ type: 'EDIT_POST', payload: res.data });
     

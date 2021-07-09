@@ -9,7 +9,7 @@ const UserPosts = () => {
 
     useEffect(() => {
         (async () => {
-            const res = await db.get('/all');
+            const res = await db.get('/post/all');
 
             dispatch({ type: 'FETCH_POSTS', payload: res.data });
         })();     

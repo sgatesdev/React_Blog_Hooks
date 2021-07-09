@@ -14,7 +14,7 @@ const DeletePost = (props) => {
 
     const deletePost = async () => {
         // send token with delete request (using POST since I'm sending JSON)
-        await db.post(`/delete/${props.match.params.id}`, { token: token });
+        await db.post(`/post/delete/${props.match.params.id}`, { token: token });
     
         dispatch({ type: 'DELETE_POST', payload: props.match.params.id });
     
