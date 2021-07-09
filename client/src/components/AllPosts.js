@@ -21,9 +21,9 @@ const AllPosts = () => {
     const posts = useSelector((state) => Object.values(state.posts));
 
     return(
-        <div className="container pt-3 d-flex justify-content-center ">
+        <div className="container pt-3 d-flex justify-content-center">
         <div className="row">
-                {loading ? <h2>Loading posts...</h2> : <PostList posts={posts} />}
+                {loading ? <h2 key={Date.now()}>Loading posts...</h2> : <PostList posts={posts} />}
         </div>
         </div>
     ); 

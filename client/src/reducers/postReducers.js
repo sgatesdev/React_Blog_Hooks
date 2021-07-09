@@ -14,6 +14,8 @@ export default (state = {}, action) => {
             return { ...state.posts, [action.payload._id]: action.payload };
         case 'DELETE_POST':
             return _.omit(state.posts, action.payload);
+        case 'INCREASE_COMMENT':
+            return { ...state, [action.payload._id]: action.payload };
         default:
             return state;
     }

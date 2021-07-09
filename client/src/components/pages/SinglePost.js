@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
@@ -11,6 +11,7 @@ const SinglePost = (props) => {
     const post = useSelector((state) => state.posts[props.match.params.id]);
     const state = useSelector((state) => state);
     const userData = useSelector((state) => state.auth.userInfo);
+    const dispatch = useDispatch();
 
     // set local state for comment form, api req status (loading), and comments returned from api req
     const [text, setText] = useState('');
@@ -33,10 +34,22 @@ const SinglePost = (props) => {
         // merge token, userId with new post data
         const sendData = { ...userData, text, post: post._id };
 
-        await db.post(`/comment/`, sendData);
-        
-        setText('');
-        fetchComments();
+        // send comment to database
+        const res = await db.post(`/comment/`, sendData);
+
+        if (res.status === 200) {
+            // update comment count for post in redux
+            dispatch({
+                type: 'INCREASE_COMMENT',
+                payload: { comment_count: post.comment_count++ }
+            });
+
+            setText('');
+            fetchComments();
+        }
+        else {
+            console.log(res);
+        }
     }
 
     const renderComments = () => {
