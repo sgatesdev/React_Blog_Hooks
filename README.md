@@ -30,7 +30,7 @@ Clone the repo or download the files!
 
 Usage Instructions
 
-![Screenshot 1](readme/screen10.png)
+![Screenshot 1](readme/screen1.png)
 ![Screenshot 2](readme/screen2.png)
 ![Screenshot 3](readme/screen3.png)
 
