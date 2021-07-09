@@ -26,7 +26,9 @@ const Create = () => {
     
         const res = await db.post('/post/', sendData);
     
-        dispatch({ type: 'WRITE_POST', payload: res.data });
+        const resComments = { ...res.data, [`comment_count`]: 0 };
+
+        dispatch({ type: 'WRITE_POST', payload: resComments });
     
         history.replace('/');
     }

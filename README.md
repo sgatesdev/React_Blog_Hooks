@@ -49,7 +49,6 @@ Licensed under the [MIT](https://opensource.org/licenses/MIT) license.
 
 ## Future Features
 
-- Comments
 - Liking posts
 - User pages
 - Register for an account
