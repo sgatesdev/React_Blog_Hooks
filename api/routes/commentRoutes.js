@@ -23,14 +23,12 @@ router.get('/all/:id', async (req,res) => {
 
 // PROTECTED ROUTE: create new comment in database 
 // add back in authUtil
-router.post('/', (req,res) => {
+router.post('/', authUtil, (req,res) => {
     let comment = new Comment(_.omit(req.body, ['token'])); // remove token from body of post
 
     comment.save((err,commentRes) => {
         if(err) return res.json(err);
 
-
-        console.log(commentRes)
         return res.json(commentRes);
     })
 }); 

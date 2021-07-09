@@ -4,6 +4,8 @@ const router = require('express').Router();
 const _ = require('lodash');
 
 const Post = require('../models/Post'); 
+const Comment = require('../models/Comment');
+
 const authUtil = require('../utils/auth');
 
 var cors = require('cors')
@@ -11,6 +13,12 @@ var cors = require('cors')
 // get all posts
 router.get('/all', cors(), async (req,res) => {
     let allPosts = await Post.find({}, '-userId').sort({ _id: -1 }).limit(20);
+    
+    // my solution for counting comments
+    for(let i = 0; i < allPosts.length; i++) {
+        let count = await Comment.countDocuments({ post: allPosts[i]._id });
+        allPosts[i] = { ...allPosts[i]['_doc'], ['comment_count']: count };
+    }
 
     if(!allPosts) {
         return res.json({ message: 'Error finding posts!' });

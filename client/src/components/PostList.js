@@ -2,8 +2,19 @@ import React from 'react';
 import { formatDate } from '../helpers/date';
 import { Link } from 'react-router-dom';
 
-
 const PostList = ({posts}) => {
+    const renderButton = (count) => {
+        if(count === 0 ) {
+            return 'Add comment';
+        }
+        else if (count === 1) {
+            return 'View Comment (1)';
+        }
+        else {
+            return `View comments (${count})`;
+        }
+    }
+
     if(posts) {
         return posts.map(post => {
             return(
@@ -17,7 +28,11 @@ const PostList = ({posts}) => {
                     {post.content}
                     </p>
                     <Link to={`single/${post._id}`}>
-                    <button className="btn btn-secondary">View Comments</button>
+                    <button className="btn btn-secondary">
+                    { 
+                        renderButton(post.comment_count)
+                    } 
+                    </button>
                     </Link>
                     <button className="btn btn-secondary mx-3">Like</button>
                     </div>
