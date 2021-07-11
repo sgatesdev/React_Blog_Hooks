@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import history from '../../history'; // import history object so I can push user around app
@@ -60,7 +61,7 @@ const CreatePost = () => {
         <div className="container">
         <form onSubmit={onSubmit}>
             <div className="form-group">
-            <h1>Create a new post</h1>
+            <h5 className="mt-2">Create a post!</h5>
             <label>Enter Title</label>
             <input 
                 name="title" 
@@ -78,7 +79,10 @@ const CreatePost = () => {
                 className="form-control"
             />
             {renderError()}
-            <button className="btn btn-secondary" type="submit">Publish</button>
+            <Link to="/posts">
+                <button className="btn btn-secondary">Back</button>
+            </Link>
+            <button className="btn btn-secondary mx-2" type="submit">Publish</button>
         </div>
         </form>
         </div>

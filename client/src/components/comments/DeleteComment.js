@@ -22,7 +22,13 @@ const DeleteComment = (props) => {
         dispatch({ type: 'DELETE_USER_COMMENT', payload: props.match.params.id });
         
         // decrease comment count in store for this post
-        dispatch({ type: 'DECREASE_COMMENT', payload: post.comment_count-- });
+        let newCount = post.comment_count - 1;
+
+        // update comment count for post in redux
+        dispatch({
+            type: 'DECREASE_COMMENT',
+            payload: { ...post, comment_count: newCount }
+        });
 
         /** NAVIGATION REDIRECT */
         history.replace('/comments');

@@ -36,12 +36,14 @@ const SinglePost = (props) => {
         const sendData = { ...userData, text, post: post._id };
 
         // send comment to database
-        const res = await db.post(`/comment/`, sendData);
+        await db.post(`/comment/`, sendData);
+
+        let newCount = post.comment_count + 1;
 
         // update comment count for post in redux
         dispatch({
             type: 'INCREASE_COMMENT',
-            payload: { comment_count: post.comment_count++ }
+            payload: { ...post, comment_count: newCount }
         });
 
         setText('');
