@@ -1,4 +1,4 @@
-// This file handles incoming API requests. Some routes are protected and use utils/auth.js as middleware to authenticate the Google token issued at login
+// This file handles incoming API requests for blog posts. Some routes are protected and use utils/auth.js as middleware to authenticate the Google token issued at login
 
 const router = require('express').Router();
 const _ = require('lodash');

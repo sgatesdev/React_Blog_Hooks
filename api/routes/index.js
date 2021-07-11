@@ -2,7 +2,7 @@ const router = require('express').Router();
 const postRoutes = require('./postRoutes');
 const commentRoutes = require('./commentRoutes');
 
-// define posts route, leave room for other routes in future (auth, comments, etc. )
+// define routes (future anticipated routes: like, user)
 router.use('/post', postRoutes);
 router.use('/comment', commentRoutes);
 
