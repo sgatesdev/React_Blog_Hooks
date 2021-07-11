@@ -10,9 +10,23 @@ const authUtil = require('../utils/auth');
 
 var cors = require('cors');
 
-// get a specific users comments
+// get a specific posts comments
 router.get('/all/:id', async (req,res) => {
-    let allComments = await Comment.find({ 'post' : req.params.id });
+    let allComments = await Comment.find({ 'post' : req.params.id }).sort({ _id: -1 });
+
+    if(!allComments) {
+        return res.json({ message: 'Error finding comments!' });
+    }
+
+    return res.json(allComments);
+})
+
+// get a specific users comments
+router.get('/user/:id', async (req,res) => {
+    let allComments = await Comment.find({ 'userEmail' : req.params.id }).populate({
+        path: 'post',
+        populate: 'Post'
+    }).sort({ _id: -1 });
 
     if(!allComments) {
         return res.json({ message: 'Error finding comments!' });
@@ -36,8 +50,6 @@ router.post('/', authUtil, (req,res) => {
 // PROTECTED ROUTE: update a single post
 router.put('/update/:id', authUtil, async (req,res) => {
     let currentComment = await Comment.findById(req.params.id);
-
-    console.log(currentComment)
     
     if(!currentComment) {
         return res.json({ message: 'Error: comment not found!' });

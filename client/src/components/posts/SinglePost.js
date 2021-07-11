@@ -17,6 +17,7 @@ const SinglePost = (props) => {
     const [text, setText] = useState('');
     const [loading, setLoading] = useState(true);
     const [comments, setComments] = useState([]);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         fetchComments();
@@ -37,19 +38,14 @@ const SinglePost = (props) => {
         // send comment to database
         const res = await db.post(`/comment/`, sendData);
 
-        if (res.status === 200) {
-            // update comment count for post in redux
-            dispatch({
-                type: 'INCREASE_COMMENT',
-                payload: { comment_count: post.comment_count++ }
-            });
+        // update comment count for post in redux
+        dispatch({
+            type: 'INCREASE_COMMENT',
+            payload: { comment_count: post.comment_count++ }
+        });
 
-            setText('');
-            fetchComments();
-        }
-        else {
-            console.log(res);
-        }
+        setText('');
+        fetchComments();
     }
 
     const renderComments = () => {
@@ -107,6 +103,7 @@ const SinglePost = (props) => {
             <Link to="/">
                 <button className="btn btn-secondary">Back</button>
             </Link>
+            { error ? <h6>${error}</h6> : null }
             { state.auth?.isSignedIn ? <button className="btn btn-secondary mx-2" onClick={addComment}>Add comment</button> : <h6 className="my-2">Please login to comment</h6> }
         </div>
     );

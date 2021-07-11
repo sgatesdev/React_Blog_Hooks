@@ -42,7 +42,7 @@ const PostList = ({posts}) => {
         })
     }
     else {
-        return <div>Loading...</div>;
+        return <div key={Date.now()}>Loading...</div>;
     }
 }
 

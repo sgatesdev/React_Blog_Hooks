@@ -21,6 +21,7 @@ const UserPosts = () => {
     return(
         <div className="container pt-3 d-flex justify-content-center ">
         <div className="row">
+        <h5 className="mt-2">My posts</h5>
                 <UserPostList posts={posts} userEmail={userEmail} />
         </div>
         </div>
