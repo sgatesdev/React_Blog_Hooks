@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import history from '../history'; // import history object so I can push user around app
-import db from '../apis/db'; // import AXIOS connection to database
+import history from '../../history'; // import history object so I can push user around app
+import db from '../../apis/db'; // import AXIOS connection to database
 
-const Create = () => {
+const CreatePost = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
@@ -85,4 +85,4 @@ const Create = () => {
     );
 }
 
-export default Create;
+export default CreatePost;

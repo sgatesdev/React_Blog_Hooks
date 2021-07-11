@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import reduxThunk from 'redux-thunk';
 
-import App from './components/App';
+import App from './App';
 import reducers from './reducers';
 
 // this enables redux devtools to work

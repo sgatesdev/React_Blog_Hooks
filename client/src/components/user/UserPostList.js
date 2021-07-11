@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatDate } from '../helpers/date';
+import { formatDate } from '../../helpers/date';
 import { Link } from 'react-router-dom';
 
 const UserPostList = ({posts,userEmail}) => {

@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
-import db from '../apis/db'; // import AXIOS connection to database
-import history from '../history'; // import history object so I can push user around app
+import db from '../../apis/db'; // import AXIOS connection to database
+import history from '../../history'; // import history object so I can push user around app
 
 const EditPost = (props) => {
     const dispatch = useDispatch();

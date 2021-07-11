@@ -2,10 +2,10 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Link } from 'react-router-dom';
-import { formatDate } from '../helpers/date';
+import { formatDate } from '../../helpers/date';
 
-import db from '../apis/db'; // import AXIOS connection to database
-import history from '../history'; // import history object so I can push user around app
+import db from '../../apis/db'; // import AXIOS connection to database
+import history from '../../history'; // import history object so I can push user around app
 
 const DeletePost = (props) => {
     const dispatch = useDispatch();
