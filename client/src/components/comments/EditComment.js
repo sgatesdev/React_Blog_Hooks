@@ -10,14 +10,14 @@ import { formatDate } from '../../helpers/date';
 const EditComment = (props) => {
     const dispatch = useDispatch();
     const comment = useSelector((state) => state.user_comments[props.match.params.id]);
-    const { token, userId } = useSelector((state) => state.auth.userInfo);
+    const { token, userId, userActualName } = useSelector((state) => state.auth.userInfo);
 
     // pull post info from redux, create local state for title and content (for form validation)
     const [text, setText] = useState(comment.text);
 
     const editComment = async () => {
         // merge token, userId with new post data
-        const sendData = { text, token, userId };
+        const sendData = { text, token, userId, userActualName };
 
         const res = await db.put(`/comment/update/${props.match.params.id}`, sendData);
     

@@ -10,7 +10,7 @@ const authUtil = require('../utils/auth');
 
 var cors = require('cors');
 
-// get a specific posts comments
+// get comments for a specific post
 router.get('/all/:id', async (req,res) => {
     let allComments = await Comment.find({ 'post' : req.params.id }).sort({ _id: -1 });
 
@@ -56,13 +56,13 @@ router.put('/update/:id', authUtil, async (req,res) => {
     }
 
     // pull title and content out of request
-    const { text, userId, email, name } = req.body;
+    const { text, userId, email, userActualName } = req.body;
 
     // update entry
     currentComment.text = text;
     currentComment.userId = userId;
     currentComment.email = email;
-    currentComment.userActualName = name;
+    currentComment.userActualName = userActualName;
 
     // save update in DB
     let updatedComment = await currentComment.save();
@@ -75,7 +75,7 @@ router.put('/update/:id', authUtil, async (req,res) => {
     }
 });
 
-// PROTECTED ROUTE: delete a single post
+// PROTECTED ROUTE: delete a single comment
 router.post('/delete/:id', authUtil, async (req,res) => {
     let deleteComment = await Comment.deleteOne({ "_id": req.params.id });
 

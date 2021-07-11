@@ -8,10 +8,8 @@ const Comment = require('../models/Comment');
 
 const authUtil = require('../utils/auth');
 
-var cors = require('cors')
-
 // get all posts
-router.get('/all', cors(), async (req,res) => {
+router.get('/all', async (req,res) => {
     let allPosts = await Post.find({}, '-userId').sort({ _id: -1 }).limit(20);
     
     // my solution for counting comments
