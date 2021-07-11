@@ -42,9 +42,6 @@ const Header = () => {
             </Link>
             <div className="collapse navbar-collapse" id="navbarMenu">
                 <ul className="navbar-nav">
-                    <li className="nav-item active">
-                        <Link className="nav-link" to="/">Home</Link>
-                    </li>
                     {renderUserLinks()}
                 </ul>
             </div>

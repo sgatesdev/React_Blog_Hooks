@@ -1,8 +1,19 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { formatDate } from '../../helpers/date';
 import { Link } from 'react-router-dom';
 
 const PostList = ({posts}) => {
+    const signedIn = useSelector((state) => state.auth.isSignedIn);
+
+    const renderLikeButton = () => {
+        return(
+            !signedIn ? <button className="btn btn-secondary mx-3">2 Likes</button> : (
+                <button className="btn btn-secondary mx-3">Like this post!</button>
+            )
+        );
+    }
+
     const renderButton = (count) => {
         if(count === 0 ) {
             return 'Add comment';
@@ -34,7 +45,9 @@ const PostList = ({posts}) => {
                     } 
                     </button>
                     </Link>
-                    <button className="btn btn-secondary mx-3">Like</button>
+                    {
+                        /* renderLikeButton() */
+                    }
                     </div>
                 </div>
                 </div>
