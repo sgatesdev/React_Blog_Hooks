@@ -10,10 +10,6 @@ Update 7-11-21: Comments are fully functional!
 
 React Blog is a full stack MERN application. I rewrote the frontend using Redux Hooks, utilized a new library for Google Sign-In, and updated styling with Bootstrap. This app uses a custom backend (REST API) that I built using Node and Express. The API has protected routes that use Google's Sign In API to verify tokens before allowing access. The backend manages a MongoDB Atlas database.
 
-The frontend is hosted on my personal domain. The backend is hosted on Heroku and for the database I used MongoDB Atlas.
-
-The app is deployed on my personal domain. Check it out [here](https://samgates.io/projects/react-blog-hooks/)!
-
 ## Table of Contents
 
 - [Installation](#installation)
